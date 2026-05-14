@@ -5,12 +5,12 @@ import React, { useEffect } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 
 const CheckAuthenticationLayout = () => {
-  const { changeStatus, status } = useAuthStore()
+  const { checkStatus, status } = useAuthStore()
 
   const backgroundColor = useThemeColor({}, 'background')
 
   useEffect(() => {
-    changeStatus()
+    checkStatus()
   }, [])
 
   if (status === 'checking') {

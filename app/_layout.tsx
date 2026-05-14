@@ -1,4 +1,5 @@
 import { useColorScheme } from '@/presentation/theme/hooks/use-color-scheme';
+import { useThemeColor } from '@/presentation/theme/hooks/use-theme-color';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -13,6 +14,7 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const backgroundColor = useThemeColor({}, 'background')
 
   const [loaded] = useFonts({
     'Kanit-Regular': require('../assets/fonts/Kanit-Regular.ttf'),
@@ -23,7 +25,12 @@ export default function RootLayout() {
   if (!loaded) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView
+      style={{
+        flex: 1,
+        backgroundColor: backgroundColor
+      }}
+    >
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{
           headerShown: false

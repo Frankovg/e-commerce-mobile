@@ -1,4 +1,5 @@
 import ThemedButton from '@/presentation/theme/components/ThemedButton'
+import Themedlink from '@/presentation/theme/components/Themedlink'
 import { ThemedText } from '@/presentation/theme/components/ThemedText'
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput'
 import React from 'react'
@@ -50,6 +51,8 @@ const LoginScreen = () => {
         >
           Ingresar
         </ThemedButton>
+
+        <View style={{ marginTop: 50 }} />
 
         <View
           style={{

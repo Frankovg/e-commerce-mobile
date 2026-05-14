@@ -1,4 +1,5 @@
-import { ThemedText } from '@/presentation/theme/components/themed-text'
+import ThemedButton from '@/presentation/theme/components/ThemedButton'
+import { ThemedText } from '@/presentation/theme/components/ThemedText'
 import ThemedTextInput from '@/presentation/theme/components/ThemedTextInput'
 import React from 'react'
 import { KeyboardAvoidingView, useWindowDimensions, View } from 'react-native'
@@ -41,6 +42,26 @@ const LoginScreen = () => {
             icon='lock-closed-outline'
           />
         </View>
+
+        <View style={{ marginTop: 10 }} />
+
+        <ThemedButton
+          icon='arrow-forward-outline'
+        >
+          Ingresar
+        </ThemedButton>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <ThemedText>¿No tienes cuenta?</ThemedText>
+          <Themedlink href='auth/register' style={{ marginHorizontal: 5 }}>Crear cuenta</Themedlink>
+        </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   )

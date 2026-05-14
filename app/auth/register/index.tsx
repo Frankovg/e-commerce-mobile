@@ -1,4 +1,4 @@
-import { ThemedText } from '@/presentation/theme/components/themed-text'
+import { ThemedText } from '@/presentation/theme/components/ThemedText'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 

@@ -1,11 +1,65 @@
-import { Text, View } from "react-native"
+import ProductImages from "@/presentation/products/components/ProductImages"
+import { useProduct } from "@/presentation/products/hooks/useProduct"
+import ThemedTextInput from "@/presentation/theme/components/ThemedTextInput"
+import { ThemedView } from "@/presentation/theme/components/ThemedView"
+import { Ionicons } from "@expo/vector-icons"
+import { Redirect, useLocalSearchParams, useNavigation } from "expo-router"
+import { useEffect } from "react"
+import { ActivityIndicator, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native"
 
 const ProductScreen = () => {
+  const { id } = useLocalSearchParams()
+  const navigation = useNavigation()
+
+  const { productQuery } = useProduct(id as string)
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Ionicons name='camera-outline' size={25} />
+    })
+  }, [])
+
+  useEffect(() => {
+    if (productQuery.data) {
+      navigation.setOptions({
+        title: productQuery.data.title
+      })
+    }
+  }, [productQuery.data])
+
+  if (productQuery.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} >
+        <ActivityIndicator size={30} />
+      </View>
+    )
+  }
+
+  if (!productQuery.data) {
+    return <Redirect href='/(products-app)/(home)' />
+  }
+
+  const product = productQuery.data!
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Product Details</Text>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView>
+        <ProductImages images={product.images} />
+
+        <ThemedView style={{ marginTop: 20, marginHorizontal: 10 }}>
+          <ThemedTextInput placeholder="Título" style={{ marginVertical: 5 }} />
+          <ThemedTextInput placeholder="Slug" style={{ marginVertical: 5 }} />
+          <ThemedTextInput placeholder="Descripción" style={{ marginVertical: 5 }} multiline numberOfLines={5} />
+        </ThemedView>
+
+        <ThemedView style={{ marginVertical: 5, marginHorizontal: 10, flexDirection: 'row', gap: 10 }}>
+          <ThemedTextInput placeholder="Precio" style={{ flex: 1 }} />
+          <ThemedTextInput placeholder="Inventario" style={{ flex: 1 }} />
+        </ThemedView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 

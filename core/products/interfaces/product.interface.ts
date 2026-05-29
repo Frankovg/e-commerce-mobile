@@ -1,7 +1,7 @@
 import { User } from "@/core/auth/interfaces/user"
 
 export interface Product {
-  id: number
+  id: string
   title: string
   price: number
   description: string
@@ -11,7 +11,7 @@ export interface Product {
   gender: Gender
   tags: string[]
   images: string[]
-  user: User
+  user?: User
 }
 
 export enum Gender {

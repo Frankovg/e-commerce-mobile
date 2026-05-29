@@ -12,7 +12,13 @@ const ProductImages = ({ images }: Props) => {
     <>
       {
         (images.length === 0) ? (
-          <View>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
             <Image
               source={require('../../../assets/images/no-images.png')}
               width={300}
